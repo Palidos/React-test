@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+header {
+  height: 4em;
+}
+
+.shadow-text {
+  text-shadow: 0.3rem 0.04rem 0.05rem #ffffff;
+}
+
+.submit-btn {
+  width: 10rem;
+}
+
+/* .new-task {
+  height: 15%;
+} */
+
+.list-group:empty::after {
+  content: "No ongoing tasks...";
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  margin: 15px 0 0;
+}
+
+.list-group-item {
+  background-color: #ff9100;
+  font-size: 20px;
+}
+.task-btn {
+  float: right;
+  width: 5rem;
+}
+
+.done-list:empty::after {
+  content: "No completed tasks...";
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  margin: 15px 0px 0px;
+}
+/* .input-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+
+}
+
+.input-card h2 {
+
+}
+
+.input-card > input {
+  background-color: transparent;
+  border: none;
+} */
