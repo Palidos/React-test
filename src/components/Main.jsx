@@ -5,38 +5,43 @@ import DoneTasks from "./DoneTasks.jsx";
 
 class Main extends Component {
   state = {
-    tasks: [],
-    doneTasks: []
+    tasks: localStorage.getItem("tasks")
+      ? JSON.parse(localStorage.getItem("tasks"))
+      : [],
+    doneTasks: localStorage.getItem("doneTasks")
+      ? JSON.parse(localStorage.getItem("doneTasks"))
+      : []
   };
+
+  syncStorage() {
+    localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+    localStorage.setItem("doneTasks", JSON.stringify(this.state.doneTasks));
+  }
 
   addTask = task => {
     this.setState({ tasks: [...this.state.tasks, task] });
   };
 
-  markAsDone = id => {
+  componentDidUpdate(prevState) {
+    if (prevState.tasks !== this.state.tasks) {
+      this.syncStorage();
+    }
+  }
+
+  markAsDone = doneTask => {
     const { tasks, doneTasks } = this.state;
-    console.log(id);
     //console.log(tasks.filter(task => task.id === id));
     this.setState({
-      doneTasks: [
-        ...doneTasks,
-        tasks.filter(task => {
-          return task.id === id;
-        })
-      ],
-      tasks: tasks.filter(task => task.id !== id)
+      doneTasks: [...doneTasks, doneTask],
+      tasks: tasks.filter(task => task.id !== doneTask.id)
     });
   };
 
-  deleteDoneTask = id => {
-    const { doneTasks } = this.state;
+  deleteTask = taskToDelete => {
+    const { tasks, doneTasks } = this.state;
     this.setState({
-      doneTasks: [
-        ...doneTasks,
-        doneTasks.filter(task => {
-          return task.id !== id;
-        })
-      ]
+      tasks: tasks.filter(task => task.id !== taskToDelete.id),
+      doneTasks: doneTasks.filter(task => task.id !== taskToDelete.id)
     });
   };
 
@@ -47,10 +52,11 @@ class Main extends Component {
         <ActiveTasks
           tasks={this.state.tasks}
           markAsDone={this.markAsDone}
+          deleteTask={this.deleteTask}
         />
         <DoneTasks
           doneTasks={this.state.doneTasks}
-          deleteDoneTask={this.deleteDoneTask}
+          deleteDoneTask={this.deleteTask}
         />
       </main>
     );

@@ -9,7 +9,7 @@ const RenderTasks = props => {
           <span>
             <button
               className="btn btn-danger task-btn mx-2"
-              onClick={props.deleteDoneTask(doneTask.id)}
+              onClick={() => props.deleteDoneTask(doneTask)}
             >
               ✖
             </button>
