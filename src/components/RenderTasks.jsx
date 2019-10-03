@@ -20,7 +20,7 @@ class RenderTasks extends Component {
     return (
       <React.Fragment>
         {tasks.map((task, index) => (
-          <li className="list-group-item rounded shadow-lg" key={index}>
+          <li className="list-group-item rounded shadow-lg" style={style} key={index}>
             <span className="task-text">{task.text}</span>
             <span>
               <button

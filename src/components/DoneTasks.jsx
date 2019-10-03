@@ -3,17 +3,28 @@ import FancyH2 from "./FancyH2.jsx";
 import RenderTasks from "./RenderTasks.jsx";
 
 class DoneTasks extends Component {
+  constructor(props) {
+    super(props);
+    this.initialState = {
+      taskToFind: "",
+      hideElement: false
+    };
+    this.state = this.initialState;
+  }
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
-
+  // ToDo hide elements that was not found
   searchTasks = () => {
-    const { taskToFind } = this.state;
+    const { doneTasks } = this.props;
+    const { taskToFind, hideElement } = this.state;
+    if (!doneTasks) throw "No done tasks yet!";
     doneTasks.map(task => {
       if (task.text.includes(taskToFind)) {
+        console.log(task.text);
       }
     });
   };
@@ -31,6 +42,7 @@ class DoneTasks extends Component {
               className=" form-control my-5"
               aria-describedby="basic-addon2"
               name="taskToFind"
+              value={this.state.taskToFind}
               onChange={this.handleChange}
               onKeyUp={this.searchTasks}
             />
