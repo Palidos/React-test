@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FancyH2 from "./FancyH2.jsx";
 
 class NewTask extends Component {
   constructor(props) {
@@ -6,10 +7,11 @@ class NewTask extends Component {
     this.initialState = {
       task: ""
     };
-
+    
+    this.newId = 0;
     this.state = this.initialState;
   }
-  newId = 0;
+  
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -42,9 +44,7 @@ class NewTask extends Component {
       <React.Fragment>
         <section className="new-task row bg-warning shadow-lg rounded p-4 my-5">
           <div className="col">
-            <div className="d-flex justify-content-center shadow-text">
-              <h2>New task</h2>
-            </div>
+            <FancyH2 headerText = "New Task" />
             <div className="input-group my-5">
               <input
                 type="text"

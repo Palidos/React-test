@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import NewTask from "./NewTask.jsx";
+
 import ActiveTasks from "./ActiveTasks.jsx";
 import DoneTasks from "./DoneTasks.jsx";
+import NewTask from "./NewTask.jsx";
 
 class Main extends Component {
   state = {
@@ -28,9 +29,10 @@ class Main extends Component {
     }
   }
 
+  // ToDo: change function expression to function declaration
+
   markAsDone = doneTask => {
     const { tasks, doneTasks } = this.state;
-    //console.log(tasks.filter(task => task.id === id));
     this.setState({
       doneTasks: [...doneTasks, doneTask],
       tasks: tasks.filter(task => task.id !== doneTask.id)

@@ -1,30 +1,6 @@
 import React, { Component } from "react";
-
-const RenderTasks = props => {
-  return (
-    <React.Fragment>
-      {props.tasks.map((task, index) => (
-        <li className="list-group-item rounded shadow-lg" key={index}>
-          <span className="task-text">{task.text}</span>
-          <span>
-            <button
-              className="btn btn-danger task-btn mx-2"
-              onClick={() => props.deleteTask(task)}
-            >
-              ✖
-            </button>
-            <button
-              className="btn btn-success task-btn mx-2"
-              onClick={() => props.markAsDone(task)}
-            >
-              ✔
-            </button>
-          </span>
-        </li>
-      ))}
-    </React.Fragment>
-  );
-};
+import FancyH2 from "./FancyH2.jsx";
+import RenderTasks from "./RenderTasks.jsx"
 
 class ActiveTasks extends Component {
   render() {
@@ -33,14 +9,13 @@ class ActiveTasks extends Component {
       <React.Fragment>
         <section className="row bg-warning shadow-lg rounded p-4 my-5">
           <div className="col">
-            <div className="d-flex justify-content-center shadow-text">
-              <h2>Active tasks</h2>
-            </div>
+            <FancyH2 headerText="Active tasks" />
             <ul className="list-group list-group-flush">
               <RenderTasks
                 tasks={tasks}
                 markAsDone={markAsDone}
                 deleteTask={deleteTask}
+                renderDoneButton={true}
               />
             </ul>
           </div>
