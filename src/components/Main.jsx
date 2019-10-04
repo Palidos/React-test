@@ -29,8 +29,6 @@ class Main extends Component {
     }
   }
 
-  // ToDo: change function expression to function declaration
-
   markAsDone = doneTask => {
     const { tasks, doneTasks } = this.state;
     this.setState({

@@ -6,8 +6,7 @@ class DoneTasks extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
-      taskToFind: "",
-      hideElement: false
+      taskToFind: ""
     };
     this.state = this.initialState;
   }
@@ -17,20 +16,20 @@ class DoneTasks extends Component {
       [name]: value
     });
   };
-  // ToDo hide elements that was not found
+
   searchTasks = () => {
     const { doneTasks } = this.props;
-    const { taskToFind, hideElement } = this.state;
+    const { taskToFind } = this.state;
     if (!doneTasks) throw "No done tasks yet!";
-    doneTasks.map(task => {
-      if (task.text.includes(taskToFind)) {
-        console.log(task.text);
-      }
-    });
+    let foundTasks =
+      taskToFind === ""
+        ? doneTasks
+        : doneTasks.filter(task => task.text.includes(taskToFind));
+    return foundTasks;
   };
 
   render() {
-    const { doneTasks, deleteDoneTask } = this.props;
+    const { deleteDoneTask } = this.props;
     return (
       <React.Fragment>
         <section className="row bg-warning shadow-lg rounded p-4 my-5">
@@ -44,11 +43,11 @@ class DoneTasks extends Component {
               name="taskToFind"
               value={this.state.taskToFind}
               onChange={this.handleChange}
-              onKeyUp={this.searchTasks}
+              onKeyDown={this.searchTasks}
             />
             <ul className="list-group list-group-flush done-list">
               <RenderTasks
-                tasks={doneTasks}
+                tasks={this.searchTasks()}
                 deleteTask={deleteDoneTask}
                 renderDoneButton={false}
               />

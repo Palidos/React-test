@@ -7,11 +7,11 @@ class NewTask extends Component {
     this.initialState = {
       task: ""
     };
-    
+    this.inputRef = React.createRef();
+
     this.newId = 0;
     this.state = this.initialState;
   }
-  
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -33,10 +33,15 @@ class NewTask extends Component {
 
     this.props.handleSubmit({
       id: this.newId++,
-      text: this.state.task
+      text: this.state.task,
+      visible: true
     });
     this.setState(this.initialState);
   };
+
+  componentDidMount() {
+    this.inputRef.current.focus();
+  }
 
   render() {
     const { task } = this.state;
@@ -44,7 +49,7 @@ class NewTask extends Component {
       <React.Fragment>
         <section className="new-task row bg-warning shadow-lg rounded p-4 my-5">
           <div className="col">
-            <FancyH2 headerText = "New Task" />
+            <FancyH2 headerText="New Task" />
             <div className="input-group my-5">
               <input
                 type="text"
@@ -53,6 +58,7 @@ class NewTask extends Component {
                 aria-describedby="basic-addon2"
                 name="task"
                 value={task}
+                ref={this.inputRef}
                 onChange={this.handleChange}
                 onKeyDown={this.handleKeyPress}
               />
